@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎉 Coffre Déverrouillé !</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>🎉 Coffre Déverrouillé !</h1>
+        
+        <p>Félicitations ! Vous avez trouvé la bonne combinaison !</p>
+
+        <div class="info">
+            <p>La combinaison était :</p>
+            <p style="font-size: 1.5rem; font-weight: bold; color: #00c6ff; margin-top: 10px;">
+                {{ combinaison[0] }} - {{ combinaison[1] }} - {{ combinaison[2] }} - {{ combinaison[3] }}
+            </p>
+        </div>
+
+        <div class="flag">
+            <div>🏆 Voici votre flag :</div>
+            <span>YNOV{Bravo!tuasgagné}</span>
+        </div>
+
+        <a href="/" class="btn">🔄 Nouvelle partie</a>
+    </div>
+</body>
+</html>

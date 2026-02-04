@@ -2,68 +2,64 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🔐 Coffre-Fort Challenge</title>
-    <link rel="stylesheet" href="/static/style.css">
+    <title>Coffre 3 chiffres</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #111;
+            color: #eee;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .box {
+            background: #222;
+            padding: 20px 30px;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 0 10px rgba(0,0,0,0.6);
+        }
+        input[type="number"] {
+            width: 50px;
+            padding: 5px;
+            margin: 0 5px;
+            text-align: center;
+            font-size: 1rem;
+        }
+        button {
+            margin-top: 15px;
+            padding: 8px 16px;
+            background: #4caf50;
+            border: none;
+            border-radius: 4px;
+            color: #fff;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #45a049;
+        }
+        .error {
+            color: #e74c3c;
+            margin-top: 10px;
+        }
+    </style>
 </head>
 <body>
-    <div class="container">
-        <h1>🔐 Coffre-Fort Sécurisé</h1>
-        <p>Trouvez la combinaison à 4 chiffres pour ouvrir le coffre</p>
-
-        {% if erreur %}
-        <div class="error">
-            ❌ Mauvaise combinaison ! Réessayez...
-        </div>
-        {% endif %}
-
-        <form method="POST" action="/verifier" class="vault-form">
-            <div class="digits">
-                <input type="number" name="chiffre1" min="0" max="9" required 
-                       pattern="[0-9]" maxlength="1" id="input1">
-                <input type="number" name="chiffre2" min="0" max="9" required 
-                       pattern="[0-9]" maxlength="1" id="input2">
-                <input type="number" name="chiffre3" min="0" max="9" required 
-                       pattern="[0-9]" maxlength="1" id="input3">
-                <input type="number" name="chiffre4" min="0" max="9" required 
-                       pattern="[0-9]" maxlength="1" id="input4">
-            </div>
-            <button type="submit" class="btn">🔓 Déverrouiller</button>
-        </form>
-
-        <div class="hint">
-            💡 <strong>Astuce pour les étudiants :</strong><br>
-            Vous pouvez utiliser des boucles imbriquées pour tester toutes les combinaisons !<br>
-            <a href="/bruteforce" class="link">Voir un exemple de code</a>
-        </div>
-    </div>
-
-    <script>
-        // Auto-focus sur le premier input
-        document.getElementById('input1').focus();
-
-        // Passage automatique au champ suivant
-        const inputs = document.querySelectorAll('.digits input');
-        inputs.forEach((input, index) => {
-            input.addEventListener('input', (e) => {
-                // Limite à un seul chiffre
-                if (e.target.value.length > 1) {
-                    e.target.value = e.target.value.slice(0, 1);
-                }
-                
-                // Passe au champ suivant automatiquement
-                if (e.target.value.length === 1 && index < inputs.length - 1) {
-                    inputs[index + 1].focus();
-                }
-            });
-
-            // Gestion du backspace pour revenir en arrière
-            input.addEventListener('keydown', (e) => {
-                if (e.key === 'Backspace' && e.target.value === '' && index > 0) {
-                    inputs[index - 1].focus();
-                }
-            });
-        });
-    </script>
+<div class="box">
+    <h1>Coffre 3 chiffres</h1>
+    <p>Entre les 3 chiffres pour ouvrir le coffre.</p>
+    <form method="post" action="/check">
+        <input type="number" name="a" min="0" max="9" required>
+        <input type="number" name="b" min="0" max="9" required>
+        <input type="number" name="c" min="0" max="9" required>
+        <br>
+        <button type="submit">Valider</button>
+    </form>
+    {% if error %}
+        <p class="error">{{ error }}</p>
+    {% endif %}
+</div>
 </body>
 </html>
